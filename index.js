@@ -2,8 +2,8 @@
 
 const AWS = require('aws-sdk');
 const SES = new AWS.SES({ region: "us-west-2" });
-const EMAIL_ADDRESS_SENDER = process.env.EMAIL_ADDRESS_SENDER;
-const EMAIL_ADDRESS_RECEIVER = process.env.EMAIL_ADDRESS_RECEIVER;
+const EMAIL_FROM = process.env.EMAIL_FROM;
+const EMAIL_TO = process.env.EMAIL_TO;
 
 exports.handler = (event) => {
     var s3Event = event.Records[0];
@@ -12,7 +12,7 @@ exports.handler = (event) => {
 
     var params = {
         Destination: {
-          ToAddresses: [EMAIL_ADDRESS_RECEIVER],
+          ToAddresses: [EMAIL_TO],
         },
         Message: {
           Body: {
@@ -20,7 +20,7 @@ exports.handler = (event) => {
           },
           Subject: { Data: "S3 Event" },
         },
-        Source: EMAIL_ADDRESS_SENDER,
+        Source: EMAIL_FROM,
       };
 
       return SES.sendEmail(params).promise();
