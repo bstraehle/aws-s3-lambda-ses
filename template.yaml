@@ -4,7 +4,7 @@ Description: Serverless nanoservice using S3, Lambda, and SES
 Parameters:
   EmailFrom:
     Type: String
-    ConstraintDescription: Must be a SES verified identity
+    Description: Must be a SES verified identity
   EmailTo:
     Type: String
 Globals:
