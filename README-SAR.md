@@ -2,7 +2,7 @@
 
 Start up:  
 
-- Deploy application, specifying email address  
+- Deploy application, specifying sender and receiver email address  
 
 Test:  
 
