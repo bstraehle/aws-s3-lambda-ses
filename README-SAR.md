@@ -2,7 +2,7 @@
 
 Start up:  
 
-- Deploy application, specifying sender and receiver email address (sender must be a SES verified identity)  
+- Deploy application, specifying sender and receiver email address  
 
 Test:  
 
