@@ -18,7 +18,7 @@ exports.handler = (event) => {
           Body: {
             Text: { Data: JSON.stringify(s3Event) },
           },
-          Subject: { Data: "S3 Event" },
+          Subject: { Data: s3Event.s3.object.key },
         },
         Source: EMAIL_FROM,
       };
