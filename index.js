@@ -16,12 +16,12 @@ exports.handler = (event) => {
         },
         Message: {
           Body: {
-            Text: { Data: s3Event },
+            Text: { Data: JSON.stringify(s3Event) },
           },
           Subject: { Data: "S3 Event" },
         },
         Source: EMAIL_ADDRESS_SENDER,
       };
-     
-      SES.sendEmail(params);
+
+      return SES.sendEmail(params).promise();
 };

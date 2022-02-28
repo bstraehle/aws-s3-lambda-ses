@@ -2,9 +2,9 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Serverless nanoservice using S3, Lambda, and SES
 Parameters:
-  EmailAddressSender:
+  EmailFrom:
     Type: String
-  EmailAddressReceiver:
+  EmailTo:
     Type: String
 Globals:
   Function:
@@ -12,10 +12,10 @@ Globals:
     MemorySize: 128
     Environment:
       Variables:
-        EMAIL_ADDRESS_SENDER:
-          Ref: EmailAddressSender
-        EMAIL_ADDRESS_RECEIVER:
-          Ref: EmailAddressReceiver
+        EMAIL_FROM:
+          Ref: EmailFrom
+        EMAIL_TO:
+          Ref: EmailTo
 Metadata:
   AWS::ServerlessRepo::Application:
     Name: nanoservice-s3-lambda-ses
@@ -36,6 +36,9 @@ Resources:
       CodeUri: .
       Description: Serverless nanoservice using S3, Lambda, and SES
       Timeout: 10
+      Policies:
+        - SESCrudPolicy:
+            IdentityName: !Ref EmailFrom
       Events:
         S3BucketEvent:
           Type: S3
