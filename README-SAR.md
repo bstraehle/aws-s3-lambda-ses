@@ -1,15 +1,23 @@
-# Serverless nanoservice using S3, Lambda, and SES  
+# Serverless nanoservice using S3, Lambda, and SES
 
-Start up:  
+![Architecture](https://raw.githubusercontent.com/bstraehle/aws-s3-lambda-ses/master/architecture.png)
 
-- Deploy application, specifying sender and receiver email address  
+Start up:
 
-Test:  
+- Deploy application, specifying sender and receiver email address (the sender must be an SES verified identity; while your account is in the SES sandbox, the receiver must be verified too)
 
-- Go to S3, bucket, and upload file  
-- Go to email client and view email  
+Test:
 
-Tear down:  
+- Go to S3, bucket (see `BucketName` stack output), and upload file
+- Go to email client and view email
 
-- Go to CloudFormation and delete application stack  
-- Go to CloudWatch, log groups, log group and delete  
+Or with the AWS CLI:
+
+```
+aws s3 cp <file> s3://<bucket>/
+```
+
+Tear down:
+
+- Go to S3, bucket, and empty bucket
+- Go to CloudFormation and delete application stack (this also deletes the CloudWatch log group)
