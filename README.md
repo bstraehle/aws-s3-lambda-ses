@@ -6,17 +6,6 @@ Available in the [AWS Serverless Application Repository](https://serverlessrepo.
 
 ![Architecture](architecture.png)
 
-```mermaid
-flowchart LR
-    user([Uploader]) -- PutObject --> s3[S3 bucket]
-    subgraph stack [AWS SAM application]
-        s3 -- s3:ObjectCreated:* --> fn[Lambda function<br/>nodejs24.x arm64]
-        fn -- SendEmail --> ses[Amazon SES]
-        role[IAM execution role] -. assumes .-> fn
-        fn -. logs .-> logs[CloudWatch Logs]
-    end
-```
-
 ## Prerequisites
 
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
